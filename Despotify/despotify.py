@@ -13,10 +13,11 @@ def openSpotify():
 
 def locateIcon(icon):
     try:
-        img = pyautogui.locateOnScreen(f'{icon}', greyscale=True)
+        img = pyautogui.locateCenterOnScreen(f'{icon}')
         return img
     except TypeError:
         pass
+        # ignores error and continues code - needed because locateCenterOnScreen() does not return None in case of match failure
 
 
 def clickSpeaker(sX, sY):
