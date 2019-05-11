@@ -11,8 +11,12 @@ def openSpotify():
     pyautogui.press('enter')
 
 
-def locateIcon(iconName):
-    return pyautogui.locateCenterOnScreen(f'{iconName}')
+def locateIcon(icon):
+    try:
+        img = pyautogui.locateOnScreen(f'{icon}', greyscale=True)
+        return img
+    except TypeError:
+        pass
 
 
 def clickSpeaker(sX, sY):
@@ -22,16 +26,18 @@ def clickSpeaker(sX, sY):
 # Driver Code
 openSpotify()
 
-try:
-    playTime = locateIcon('ad.png')
-    try:
-        sX, sY = locateIcon('speakerBtn.png')
-        clickSpeaker(sX, sY)
-        time.sleep(30)
-        openSpotify()
-        clickSpeaker(sX, sY)
+playTime = locateIcon('ad.png')
+if playTime is None:
+    playTime = locateIcon('ad2.png')
+    if playTime is not None:
+        try:
+            sX, sY = locateIcon('speakerBtn.png')
+            clickSpeaker(sX, sY)
+            time.sleep(30)
+            openSpotify()
+            clickSpeaker(sX, sY)
 
-    except TypeError:
-        print('Speaker button out of range')
-except TypeError:
-    print('No ads are playing')
+        except TypeError:
+            print('Speaker button out of range')
+    else:
+        print('No ads are playing')
