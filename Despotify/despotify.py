@@ -30,15 +30,15 @@ openSpotify()
 playTime = locateIcon('ad.png')
 if playTime is None:
     playTime = locateIcon('ad2.png')
-    if playTime is not None:
-        try:
-            sX, sY = locateIcon('speakerBtn.png')
-            clickSpeaker(sX, sY)
-            time.sleep(30)
-            openSpotify()
-            clickSpeaker(sX, sY)
+if playTime is not None:
+    try:
+        sX, sY = locateIcon('speakerBtn.png')
+        clickSpeaker(sX, sY)
+        time.sleep(30)
+        openSpotify()
+        clickSpeaker(sX, sY)
 
-        except TypeError:
-            print('Speaker button out of range')
-    else:
-        print('No ads are playing')
+    except TypeError:
+        print('Speaker button out of range')
+else:
+    print('No ads are playing')
